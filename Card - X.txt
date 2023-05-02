@@ -1,0 +1,5 @@
+Card - X
+Game - Problema carta trunfo vindo null
+Human - X
+Pc - 
+Player - 
