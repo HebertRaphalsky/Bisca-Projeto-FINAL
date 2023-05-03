@@ -98,7 +98,45 @@ public class Pc extends Player {
         }
         return trumpWorth;
     }
+    private int _isCartaDirectlyBelow(Carta Carta, Carta played) {
+        switch (Carta.getTipo()) {
+            case "A":
+                if (played.getTipo().compareTo("7") == 0) {
+                    return 50;
+                } else if (played.getTipo().compareTo("K") == 0) {
+                    return 1;
+                }
+                break;
+            case "7":
+                if (played.getTipo().compareTo("K") == 0) {
+                    return 50;
+                } else if (played.getTipo().compareTo("J") == 0) {
+                    return 1;
+                }
+                break;
+            case "K":
+                if (played.getTipo().compareTo("J") == 0) {
+                    return 50;
+                } else if (played.getTipo().compareTo("Q") == 0) {
+                    return 1;
+                }
+                break;
+            case "J":
+                if (played.getValor() < 3)
+                    return 50;
+                break;
+            case "Q":
+                if (played.getValor() < 2)
+                    return 50;
+                break;
+            default:
+                break;
+        }
 
+        return 0;
+    }
+
+   
    
  
 }
