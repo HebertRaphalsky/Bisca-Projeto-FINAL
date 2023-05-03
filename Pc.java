@@ -159,6 +159,14 @@ public class Pc extends Player {
         return 1;
     }
    
+    /**
+     * @return
+     */
+    private Carta getTrunfo() {
+        Carta Tru = new Carta("7", "Ouro");
+
+        return Tru;
+    }
    
  
 }
