@@ -231,4 +231,18 @@ public class Pc extends Player {
         }
         this._unknownCartas.remove(Game.getTrunfo());
     }
+    
+    private void _evaluateFirst() {
+        this._worth = new HashMap<Carta, Integer>();
+        Integer CartaWorth;
+        for (Carta Carta : this._mao) {
+            CartaWorth = this._giveWorth(Carta);
+            CartaWorth += this._evaluateByNipe(Carta);
+            if (!this.trumpsExist()) {
+                CartaWorth += this._checkEaters(Carta);
+            }
+
+            this._worth.put(Carta, CartaWorth);
+        }
+    }
 }
