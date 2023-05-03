@@ -199,4 +199,7 @@ public class Pc extends Player {
         return -1;
     }
  
+    public void seePlayedCarta(Carta Carta) {
+        this._unknownCartas.remove(Carta);
+    }
 }
