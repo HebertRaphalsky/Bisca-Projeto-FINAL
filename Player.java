@@ -17,4 +17,15 @@ public abstract class Player {
     public ArrayList<Carta> getHand() {
         return this._mao;
     }
+
+    public ArrayList<Carta> getPoints() {
+        return this._points;
+    }
+
+    public void addToPoints(Carta c1, Carta c2, Carta c3, Carta c4) {
+        this._points.add(c1);
+        this._points.add(c2);
+        this._points.add(c3);
+        this._points.add(c4);
+    }
 }
