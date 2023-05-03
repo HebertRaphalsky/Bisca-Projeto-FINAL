@@ -91,3 +91,28 @@ public class Game {
             return _p4;
     
         }
+
+    private void _chooseNextStart(Player _p12, Player _p22, Player _p32, Player _p42) {
+    }
+
+    public static Carta getTrunfo() {
+        return _Trunfo;
+    }
+
+    public static Stack<Carta> getDeck() {
+        return _Mao;
+    }
+
+    private void _printPlay(Player p) {
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("*   Now playing: " + p + "   *");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+
+    private void _printRoundvencedor(Player p, Carta c1, Carta c2, Carta c3, Carta c4) {
+            System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+            System.out.println("    ROUND vencedor: " + p);
+            System.out.println("    " + c1 + " > " + c2);
+            System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+    
+        }
