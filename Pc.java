@@ -245,4 +245,30 @@ public class Pc extends Player {
             this._worth.put(Carta, CartaWorth);
         }
     }
+    
+    private int _giveWorth(Carta Carta) {
+        int Resultado = 0;
+        switch (Carta.getTipo()) {
+            case "A":
+                Resultado = 9;
+                break;
+            case "7":
+                Resultado = 8;
+                break;
+            case "K":
+                Resultado = 4;
+                break;
+            case "J":
+                Resultado = 2;
+                break;
+            case "Q":
+                Resultado = 1;
+                break;
+            default:
+                Resultado = 0;
+                break;
+        }
+
+        return Resultado;
+    }
 }
