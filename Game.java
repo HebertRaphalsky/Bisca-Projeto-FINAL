@@ -36,3 +36,20 @@ public class Game {
         System.out.println("----------------------------");
         System.out.println("*   Carta Trunfo é " + this._Trunfo + "   *");
         System.out.println("----------------------------");
+
+        while (this._p1.getHand().size() != 0 && this._p2.getHand().size() != 0
+                && this._p3.getHand().size() != 0 && this._p4.getHand().size() != 0) {
+            this._printPlay(this._p1);
+            playedFirst = this._p1.play();
+
+            this._printPlay(this._p2);
+            playedSecond = this._p2.play(playedFirst);
+
+            this._printPlay(this._p3);
+            playedThird = this._p3.play(playedSecond);
+
+            this._printPlay(this._p4);
+            playedFourt = this._p4.play(playedThird);
+
+            Resultado = this._evaluatePlay(playedFirst, playedSecond, playedThird, playedFourt);
+            if (this._p1 instanceof Pc)
