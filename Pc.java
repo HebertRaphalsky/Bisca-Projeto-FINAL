@@ -32,6 +32,15 @@ public class Pc extends Player {
         return Carta;
     }
 
-    
+    public Carta play(Carta played) {
+        System.out.println(this._mao); // For testing purposes
+        this._unknownCartas.remove(played);
+        this._evaluateLast(played);
+        Carta Carta = this._pickLowest();
+        this._mao.remove(Carta);
+        return Carta;
+    }
+
+
  
 }
