@@ -118,28 +118,47 @@ public class Game {
     }
 
     private int _evaluatePlay(Carta c1, Carta c2, Carta c3, Carta c4) {
-            int Resultado;
-            if (c1.getNipe() != c2.getNipe()) {
-                if (c1.getNipe().compareTo(this._Trunfo.getNipe()) != 0
-                        && c2.getNipe().compareTo(this._Trunfo.getNipe()) != 0) {
-                    Resultado = 1;
-                } else if (c1.getNipe().compareTo(this._Trunfo.getNipe()) == 0) {
-                    Resultado = 1;
-                } else {
-                    Resultado = -1;
-                }
+        int Resultado;
+        if (c1.getNipe() != c2.getNipe()) {
+            if (c1.getNipe().compareTo(this._Trunfo.getNipe()) != 0
+                    && c2.getNipe().compareTo(this._Trunfo.getNipe()) != 0) {
+                Resultado = 1;
+            } else if (c1.getNipe().compareTo(this._Trunfo.getNipe()) == 0) {
+                Resultado = 1;
             } else {
-                if (c1.getValor() > c2.getValor()) {
+                Resultado = -1;
+            }
+        } else {
+            if (c1.getValor() > c2.getValor()) {
+                Resultado = 1;
+            } else if (c1.getValor() < c2.getValor()) {
+                Resultado = -1;
+            } else {
+                if (c1.getTipo().compareTo(c2.getTipo()) > 0) {
                     Resultado = 1;
-                } else if (c1.getValor() < c2.getValor()) {
-                    Resultado = -1;
                 } else {
-                    if (c1.getTipo().compareTo(c2.getTipo()) > 0) {
-                        Resultado = 1;
-                    } else {
-                        Resultado = -1;
-                    }
+                    Resultado = -1;
                 }
             }
-            return Resultado;
+        }
+        return Resultado;
+    }
+
+    private void _chooseStarter() {
+        int coin = new Random().nextInt(2);
+        Player temp;
+        if (coin != 0) {
+            temp = this._p1;
+            this._p1 = this._p2;
+            this._p2 = temp;
+        }
+    }
+
+    private void _giveCartas() {
+            for (int i = 0; i < 3; i++) {
+                this._p1.draw(_Mao.pop());
+                this._p2.draw(_Mao.pop());
+                this._p3.draw(_Mao.pop());
+                this._p4.draw(_Mao.pop());
+            }
         }
