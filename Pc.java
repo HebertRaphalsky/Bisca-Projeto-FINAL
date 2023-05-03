@@ -16,6 +16,14 @@ public class Pc extends Player {
         this._points = new ArrayList<Carta>();
         this._populateUnknownCartas();
     }
+    public void draw(Carta carta) {
+        this._mao.add(carta);
+        if (Game.getDeck().size() == 0 || Game.getDeck().size() == 1) {
+            this._unknownCartas.add(Game.getTrunfo());
+        }
+        this._unknownCartas.remove(carta);
+    }
+
     
  
 }
