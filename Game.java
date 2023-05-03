@@ -65,3 +65,29 @@ public class Game {
                 this._printRoundvencedor(this._p2, playedSecond, playedFirst, playedFourt, playedThird);
                 this._p2.addToPoints(playedFirst, playedSecond, playedThird, playedFourt);
                 this._chooseNextStart(this._p2, this._p1, this._p4, this._p4);
+
+                this._p1.draw(_Mao.pop());
+                this._p2.draw(_Mao.pop());
+                this._p3.draw(_Mao.pop());
+                this._p4.draw(_Mao.pop());
+    
+            }
+            if (this._p1.countPoints() > this._p2.countPoints()
+                    && this._p3.countPoints() > this._p4.countPoints()) {
+                return this._p1;
+            }
+    
+            else if (this._p2.countPoints() > this._p1.countPoints()
+                    && this._p3.countPoints() > this._p4.countPoints())
+                return this._p2;
+    
+            else if (this._p3.countPoints() > this._p1.countPoints()
+                    && this._p2.countPoints() > this._p4.countPoints())
+                return this._p3;
+    
+            else if (this._p4.countPoints() > this._p1.countPoints()
+                    && this._p2.countPoints() > this._p3.countPoints())
+                return this._p4;
+            return _p4;
+    
+        }
