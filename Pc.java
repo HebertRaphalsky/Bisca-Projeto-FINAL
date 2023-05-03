@@ -280,4 +280,34 @@ public class Pc extends Player {
 
         return 0;
     }
+    private int _checkEaters(Carta Carta) {
+        boolean noEatNoEaten = false, eatNoEaten = false, noEatEaten = false, eatEaten = false;
+        for (Carta inCarta : this._unknownCartas) {
+            if (inCarta.getNipe().compareTo(Carta.getNipe()) == 0) {
+                noEatNoEaten = true;
+                if (inCarta.getValor() < Carta.getValor()) {
+                    noEatNoEaten = false;
+                    eatNoEaten = true;
+                }
+                if (inCarta.getValor() > Carta.getValor()) {
+                    noEatNoEaten = false;
+                    noEatEaten = true;
+                }
+                if (eatNoEaten && noEatEaten) {
+                    eatEaten = true;
+                }
+            }
+        }
+        if (noEatNoEaten) {
+            return -10;
+        } else if (eatEaten) {
+            return 7;
+        } else if (noEatEaten) {
+            return 6;
+        } else if (eatNoEaten) {
+            return 1;
+        }
+
+        return 0;
+    }
 }
