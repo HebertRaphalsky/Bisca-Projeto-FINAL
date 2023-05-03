@@ -110,9 +110,36 @@ public class Game {
     }
 
     private void _printRoundvencedor(Player p, Carta c1, Carta c2, Carta c3, Carta c4) {
-            System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-            System.out.println("    ROUND vencedor: " + p);
-            System.out.println("    " + c1 + " > " + c2);
-            System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-    
+        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+        System.out.println("    ROUND vencedor: " + p);
+        System.out.println("    " + c1 + " > " + c2);
+        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+
+    }
+
+    private int _evaluatePlay(Carta c1, Carta c2, Carta c3, Carta c4) {
+            int Resultado;
+            if (c1.getNipe() != c2.getNipe()) {
+                if (c1.getNipe().compareTo(this._Trunfo.getNipe()) != 0
+                        && c2.getNipe().compareTo(this._Trunfo.getNipe()) != 0) {
+                    Resultado = 1;
+                } else if (c1.getNipe().compareTo(this._Trunfo.getNipe()) == 0) {
+                    Resultado = 1;
+                } else {
+                    Resultado = -1;
+                }
+            } else {
+                if (c1.getValor() > c2.getValor()) {
+                    Resultado = 1;
+                } else if (c1.getValor() < c2.getValor()) {
+                    Resultado = -1;
+                } else {
+                    if (c1.getTipo().compareTo(c2.getTipo()) > 0) {
+                        Resultado = 1;
+                    } else {
+                        Resultado = -1;
+                    }
+                }
+            }
+            return Resultado;
         }
