@@ -24,6 +24,14 @@ public class Pc extends Player {
         this._unknownCartas.remove(carta);
     }
 
+    public Carta play() {
+        System.out.println(this._mao); // For testing purposes
+        this._evaluateFirst();
+        Carta Carta = this._pickLowest();
+        this._mao.remove(Carta);
+        return Carta;
+    }
+
     
  
 }
