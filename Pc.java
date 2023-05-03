@@ -74,6 +74,31 @@ public class Pc extends Player {
         }
     }
 
+    private int _evaluateTrumpValue(Carta Carta) {
+        int trumpWorth = '2';
+        switch (Carta.getValor()) {
+            case 11:
+                trumpWorth = 1;
+                break;
+            case 10:
+                trumpWorth = 2;
+                break;
+            case 4:
+                trumpWorth = 3;
+                break;
+            case 3:
+                trumpWorth = 4;
+                break;
+            case 2:
+                trumpWorth = 5;
+                break;
+            default:
+                trumpWorth = 6;
+                break;
+        }
+        return trumpWorth;
+    }
 
+   
  
 }
