@@ -53,3 +53,15 @@ public class Game {
 
             Resultado = this._evaluatePlay(playedFirst, playedSecond, playedThird, playedFourt);
             if (this._p1 instanceof Pc)
+
+            {
+                ((Pc) this._p1).seePlayedCarta(playedSecond);
+            }
+            if (Resultado == 1) {
+                this._printRoundvencedor(this._p1, playedFirst, playedSecond, playedThird, playedFourt);
+                this._p1.addToPoints(playedFirst, playedSecond, playedThird, playedFourt);
+                this._chooseNextStart(this._p1, this._p2, this._p3, this._p4);
+            } else {
+                this._printRoundvencedor(this._p2, playedSecond, playedFirst, playedFourt, playedThird);
+                this._p2.addToPoints(playedFirst, playedSecond, playedThird, playedFourt);
+                this._chooseNextStart(this._p2, this._p1, this._p4, this._p4);
