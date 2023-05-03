@@ -136,6 +136,7 @@ public class Pc extends Player {
         return 0;
     }
 
+
     private int _evaluateChanceToPass(Carta Carta) {
         double beingEatenChance;
         int eatingCartas = 0, edibleCartas = 0;
@@ -310,4 +311,39 @@ public class Pc extends Player {
 
         return 0;
     }
+
+   
+    private Carta _pickLowest() {
+        Carta Resultado = null;
+        Integer worth = 100;
+        for (Map.Entry<Carta, Integer> pair : this._worth.entrySet()) {
+            if (pair.getValue() < worth) {
+                Resultado = pair.getKey();
+                worth = pair.getValue();
+            } else if (pair.getValue() == worth) {
+                if (Resultado.getValor() > pair.getKey().getValor()) {
+                    Resultado = pair.getKey();
+                    worth = pair.getValue();
+                }
+            }
+        }
+
+        return Resultado;
+    }
+
+    private boolean trumpsExist() {
+        for (Carta Carta : this._unknownCartas) {
+            if (Carta.getNipe().compareTo(Game.getTrunfo().getNipe()) == 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+   
+    
+   
+   
+ 
+
 }
