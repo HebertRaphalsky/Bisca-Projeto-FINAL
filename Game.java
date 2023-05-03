@@ -155,10 +155,40 @@ public class Game {
     }
 
     private void _giveCartas() {
-            for (int i = 0; i < 3; i++) {
-                this._p1.draw(_Mao.pop());
-                this._p2.draw(_Mao.pop());
-                this._p3.draw(_Mao.pop());
-                this._p4.draw(_Mao.pop());
+        for (int i = 0; i < 3; i++) {
+            this._p1.draw(_Mao.pop());
+            this._p2.draw(_Mao.pop());
+            this._p3.draw(_Mao.pop());
+            this._p4.draw(_Mao.pop());
+        }
+    }
+
+    private void _DarMao() {
+        _Mao = new Stack<Carta>();
+        for (String Nipe : _Nipes) {
+            for (Integer i = 1; i < 11; i++) {
+                if (i != 1 && i <= 7) {
+                    _Mao.add(new Carta(i.toString(), Nipe));
+                } else {
+                    switch (i) {
+                        case 1:
+                            _Mao.add(new Carta("As", Nipe));
+                            break;
+                        case 8:
+                            _Mao.add(new Carta("J", Nipe));
+                            break;
+                        case 9:
+                            _Mao.add(new Carta("Q", Nipe));
+                            break;
+                        case 10:
+                            _Mao.add(new Carta("K", Nipe));
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
         }
+        Collections.shuffle(_Mao);
+    }
+}
