@@ -41,6 +41,39 @@ public class Pc extends Player {
         return Carta;
     }
 
+    private void _evaluateLast(Carta played) {
+        this._worth = new HashMap<Carta, Integer>();
+        Integer CartaWorth;
+        for (Carta Carta : this._mao) {
+            CartaWorth = 0;
+            if (Carta.getNipe().compareTo(played.getNipe()) == 0) { // Se a tua Carta e a Carta jogada são do mesmo
+                // naipe
+                CartaWorth--;
+                CartaWorth -= this._isCartaDirectlyBelow(Carta, played);
+                CartaWorth += this._evaluateBelow(Carta);
+                CartaWorth += this._evaluateChanceToPass(Carta);
+            } else {
+                if (Carta.getNipe().compareTo(Game.getTrunfo().getNipe()) == 0) { // Se a tua Carta é um trunfo
+                    if (played.getValor() >= 2) {
+                        CartaWorth -= this._evaluateTrumpValue(Carta);
+                    } else {
+                        CartaWorth += 2;
+                    }
+                } else if (played.getNipe().compareTo(Game.getTrunfo().getNipe()) == 0) { // Se a Carta do oponente é
+                                                                                          // um
+                    // trunfo
+                    CartaWorth = this._giveWorth(Carta);
+                } else { // Se são naipes diferentes
+                    CartaWorth = this._giveWorth(Carta);
+                    if (CartaWorth < 1) {
+                        CartaWorth -= 2;
+                    }
+                }
+            }
+            this._worth.put(Carta, CartaWorth);
+        }
+    }
+
 
  
 }
