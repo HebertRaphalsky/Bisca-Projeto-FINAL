@@ -89,8 +89,10 @@ public class Game {
                     && this._p2.countPoints() > this._p3.countPoints())
                 return this._p4;
             return _p4;
-    
         }
+        return _p1;
+    }
+        
 
     private void _chooseNextStart(Player _p12, Player _p22, Player _p32, Player _p42) {
     }
@@ -111,7 +113,7 @@ public class Game {
 
     private void _printRoundvencedor(Player p, Carta c1, Carta c2, Carta c3, Carta c4) {
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-        System.out.println("    ROUND vencedor: " + p);
+        System.out.println("    JOGADOR vencedor: " + p);
         System.out.println("    " + c1 + " > " + c2);
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 
