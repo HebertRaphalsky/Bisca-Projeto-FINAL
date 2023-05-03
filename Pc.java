@@ -135,6 +135,183 @@ public class Pc extends Player {
 
         return 0;
     }
+
+
+    private int _evaluateChanceToPass(Carta Carta) {
+        double beingEatenChance;
+        int eatingCartas = 0, edibleCartas = 0;
+        for (Carta CartaIn : this._unknownCartas) {
+            if (CartaIn.getNipe().compareTo(Carta.getNipe()) == 0) {
+                if (CartaIn.getValor() > Carta.getValor()) {
+                    eatingCartas++;
+                } else {
+                    edibleCartas++;
+                }
+            } else if (CartaIn.getNipe().compareTo(getTrunfo().getNipe()) == 0) {
+                eatingCartas++;
+            }
+        }
+
+        beingEatenChance = ((eatingCartas - edibleCartas) / (eatingCartas + edibleCartas)) * 100;
+        if (beingEatenChance >= 55) {
+            return -1;
+        }
+
+        return 1;
+    }
+   
+    /**
+     * @return
+     */
+    private Carta getTrunfo() {
+        Carta Tru = new Carta("7", "Ouro");
+
+        return Tru;
+    }
+   
+    private int _evaluateBelow(Carta Carta) {
+        int nrCartasBelow = 0;
+        for (Carta CartaIn : this._unknownCartas) {
+            if (CartaIn.getNipe().compareTo(Carta.getNipe()) == 0) {
+                switch (Carta.getTipo()) {
+                    case "A":
+                        if (CartaIn.getTipo().compareTo("7") == 0 || CartaIn.getTipo().compareTo("K") == 0) {
+                            nrCartasBelow++;
+                        }
+                        break;
+                    case "K":
+                        if (CartaIn.getTipo().compareTo("J") == 0 || CartaIn.getTipo().compareTo("Q") == 0) {
+                            nrCartasBelow++;
+                        }
+                        break;
+                    case "7":
+                        if (CartaIn.getTipo().compareTo("K") == 0 || CartaIn.getTipo().compareTo("J") == 0) {
+                            nrCartasBelow++;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                if (nrCartasBelow == 2) {
+                    return 2;
+                }
+            }
+        }
+        return -1;
+    }
+ 
+    public void seePlayedCarta(Carta Carta) {
+        this._unknownCartas.remove(Carta);
+    }
+    
+    private void _populateUnknownCartas() {
+        this._unknownCartas = new ArrayList<Carta>();
+        for (String Nipe : _Nipes) {
+            for (Integer i = 1; i < 11; i++) {
+                if (i != 1 && i <= 7) {
+                    this._unknownCartas.add(new Carta(i.toString(), Nipe));
+                } else {
+                    switch (i) {
+                        case 1:
+                            this._unknownCartas.add(new Carta("A", Nipe));
+                            break;
+                        case 8:
+                            this._unknownCartas.add(new Carta("J", Nipe));
+                            break;
+                        case 9:
+                            this._unknownCartas.add(new Carta("Q", Nipe));
+                            break;
+                        case 10:
+                            this._unknownCartas.add(new Carta("K", Nipe));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        this._unknownCartas.remove(Game.getTrunfo());
+    }
+    
+    private void _evaluateFirst() {
+        this._worth = new HashMap<Carta, Integer>();
+        Integer CartaWorth;
+        for (Carta Carta : this._mao) {
+            CartaWorth = this._giveWorth(Carta);
+            CartaWorth += this._evaluateByNipe(Carta);
+            if (!this.trumpsExist()) {
+                CartaWorth += this._checkEaters(Carta);
+            }
+
+            this._worth.put(Carta, CartaWorth);
+        }
+    }
+    
+    private int _giveWorth(Carta Carta) {
+        int Resultado = 0;
+        switch (Carta.getTipo()) {
+            case "A":
+                Resultado = 9;
+                break;
+            case "7":
+                Resultado = 8;
+                break;
+            case "K":
+                Resultado = 4;
+                break;
+            case "J":
+                Resultado = 2;
+                break;
+            case "Q":
+                Resultado = 1;
+                break;
+            default:
+                Resultado = 0;
+                break;
+        }
+
+        return Resultado;
+    }
+    
+
+    private int _evaluateByNipe(Carta Carta) {
+        if (Carta.getNipe().compareTo(Game.getTrunfo().getNipe()) == 0) {
+            return 3;
+        }
+
+        return 0;
+    }
+    private int _checkEaters(Carta Carta) {
+        boolean noEatNoEaten = false, eatNoEaten = false, noEatEaten = false, eatEaten = false;
+        for (Carta inCarta : this._unknownCartas) {
+            if (inCarta.getNipe().compareTo(Carta.getNipe()) == 0) {
+                noEatNoEaten = true;
+                if (inCarta.getValor() < Carta.getValor()) {
+                    noEatNoEaten = false;
+                    eatNoEaten = true;
+                }
+                if (inCarta.getValor() > Carta.getValor()) {
+                    noEatNoEaten = false;
+                    noEatEaten = true;
+                }
+                if (eatNoEaten && noEatEaten) {
+                    eatEaten = true;
+                }
+            }
+        }
+        if (noEatNoEaten) {
+            return -10;
+        } else if (eatEaten) {
+            return 7;
+        } else if (noEatEaten) {
+            return 6;
+        } else if (eatNoEaten) {
+            return 1;
+        }
+
+        return 0;
+    }
+
    
     private Carta _pickLowest() {
         Carta Resultado = null;
@@ -163,17 +340,10 @@ public class Pc extends Player {
 
         return false;
     }
-    private boolean trumpsExist() {
-        for (Carta Carta : this._unknownCartas) {
-            if (Carta.getNipe().compareTo(Game.getTrunfo().getNipe()) == 0) {
-                return true;
-            }
-        }
-
-        return false;
-    }
+   
     
    
    
  
+
 }
