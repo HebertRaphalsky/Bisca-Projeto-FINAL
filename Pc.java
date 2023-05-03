@@ -136,7 +136,6 @@ public class Pc extends Player {
         return 0;
     }
 
-
     private int _evaluateChanceToPass(Carta Carta) {
         double beingEatenChance;
         int eatingCartas = 0, edibleCartas = 0;
