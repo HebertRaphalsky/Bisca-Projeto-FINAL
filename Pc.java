@@ -135,7 +135,26 @@ public class Pc extends Player {
 
         return 0;
     }
+   
+    private Carta _pickLowest() {
+        Carta Resultado = null;
+        Integer worth = 100;
+        for (Map.Entry<Carta, Integer> pair : this._worth.entrySet()) {
+            if (pair.getValue() < worth) {
+                Resultado = pair.getKey();
+                worth = pair.getValue();
+            } else if (pair.getValue() == worth) {
+                if (Resultado.getValor() > pair.getKey().getValor()) {
+                    Resultado = pair.getKey();
+                    worth = pair.getValue();
+                }
+            }
+        }
 
+        return Resultado;
+    }
+
+    
    
    
  
