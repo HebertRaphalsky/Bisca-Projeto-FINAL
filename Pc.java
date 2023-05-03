@@ -271,4 +271,78 @@ public class Pc extends Player {
 
         return Resultado;
     }
+    
+
+    private int _evaluateByNipe(Carta Carta) {
+        if (Carta.getNipe().compareTo(Game.getTrunfo().getNipe()) == 0) {
+            return 3;
+        }
+
+        return 0;
+    }
+    private int _checkEaters(Carta Carta) {
+        boolean noEatNoEaten = false, eatNoEaten = false, noEatEaten = false, eatEaten = false;
+        for (Carta inCarta : this._unknownCartas) {
+            if (inCarta.getNipe().compareTo(Carta.getNipe()) == 0) {
+                noEatNoEaten = true;
+                if (inCarta.getValor() < Carta.getValor()) {
+                    noEatNoEaten = false;
+                    eatNoEaten = true;
+                }
+                if (inCarta.getValor() > Carta.getValor()) {
+                    noEatNoEaten = false;
+                    noEatEaten = true;
+                }
+                if (eatNoEaten && noEatEaten) {
+                    eatEaten = true;
+                }
+            }
+        }
+        if (noEatNoEaten) {
+            return -10;
+        } else if (eatEaten) {
+            return 7;
+        } else if (noEatEaten) {
+            return 6;
+        } else if (eatNoEaten) {
+            return 1;
+        }
+
+        return 0;
+    }
+
+   
+    private Carta _pickLowest() {
+        Carta Resultado = null;
+        Integer worth = 100;
+        for (Map.Entry<Carta, Integer> pair : this._worth.entrySet()) {
+            if (pair.getValue() < worth) {
+                Resultado = pair.getKey();
+                worth = pair.getValue();
+            } else if (pair.getValue() == worth) {
+                if (Resultado.getValor() > pair.getKey().getValor()) {
+                    Resultado = pair.getKey();
+                    worth = pair.getValue();
+                }
+            }
+        }
+
+        return Resultado;
+    }
+
+    private boolean trumpsExist() {
+        for (Carta Carta : this._unknownCartas) {
+            if (Carta.getNipe().compareTo(Game.getTrunfo().getNipe()) == 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+   
+    
+   
+   
+ 
+
 }
