@@ -168,5 +168,35 @@ public class Pc extends Player {
         return Tru;
     }
    
+    private int _evaluateBelow(Carta Carta) {
+        int nrCartasBelow = 0;
+        for (Carta CartaIn : this._unknownCartas) {
+            if (CartaIn.getNipe().compareTo(Carta.getNipe()) == 0) {
+                switch (Carta.getTipo()) {
+                    case "A":
+                        if (CartaIn.getTipo().compareTo("7") == 0 || CartaIn.getTipo().compareTo("K") == 0) {
+                            nrCartasBelow++;
+                        }
+                        break;
+                    case "K":
+                        if (CartaIn.getTipo().compareTo("J") == 0 || CartaIn.getTipo().compareTo("Q") == 0) {
+                            nrCartasBelow++;
+                        }
+                        break;
+                    case "7":
+                        if (CartaIn.getTipo().compareTo("K") == 0 || CartaIn.getTipo().compareTo("J") == 0) {
+                            nrCartasBelow++;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                if (nrCartasBelow == 2) {
+                    return 2;
+                }
+            }
+        }
+        return -1;
+    }
  
 }
