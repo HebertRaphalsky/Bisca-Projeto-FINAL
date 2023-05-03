@@ -29,5 +29,38 @@ public class Carta {
         return this._Valor;
     }
 
-    
+    private int _Calcvalor() {
+        int Resultado;
+        switch (this._Tipo) {
+            case "A":
+                Resultado = 11;
+                break;
+            case "K":
+                Resultado = 4;
+                break;
+            case "Q":
+                Resultado = 2;
+                break;
+            case "J":
+                Resultado = 3;
+                break;
+            case "7":
+                Resultado = 10;
+                break;
+            default:
+                Resultado = 0;
+                break;
+        }
+
+        return Resultado;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Carta) {
+            return this.toString().equals(((Carta) obj).toString());
+        }
+
+        return false;
+    }
 }
