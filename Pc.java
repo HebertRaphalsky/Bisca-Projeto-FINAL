@@ -154,6 +154,24 @@ public class Pc extends Player {
         return Resultado;
     }
 
+    private boolean trumpsExist() {
+        for (Carta Carta : this._unknownCartas) {
+            if (Carta.getNipe().compareTo(Game.getTrunfo().getNipe()) == 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    private boolean trumpsExist() {
+        for (Carta Carta : this._unknownCartas) {
+            if (Carta.getNipe().compareTo(Game.getTrunfo().getNipe()) == 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
     
    
    
