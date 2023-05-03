@@ -28,4 +28,18 @@ public abstract class Player {
         this._points.add(c3);
         this._points.add(c4);
     }
+
+    public int countPoints() {
+        int Resultado = 0;
+        for (int i = 0; i < this._points.size(); i++) {
+            Resultado += this._points.get(i).getValor();
+        }
+
+        return Resultado;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
