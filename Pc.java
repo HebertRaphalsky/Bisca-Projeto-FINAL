@@ -202,4 +202,33 @@ public class Pc extends Player {
     public void seePlayedCarta(Carta Carta) {
         this._unknownCartas.remove(Carta);
     }
+    
+    private void _populateUnknownCartas() {
+        this._unknownCartas = new ArrayList<Carta>();
+        for (String Nipe : _Nipes) {
+            for (Integer i = 1; i < 11; i++) {
+                if (i != 1 && i <= 7) {
+                    this._unknownCartas.add(new Carta(i.toString(), Nipe));
+                } else {
+                    switch (i) {
+                        case 1:
+                            this._unknownCartas.add(new Carta("A", Nipe));
+                            break;
+                        case 8:
+                            this._unknownCartas.add(new Carta("J", Nipe));
+                            break;
+                        case 9:
+                            this._unknownCartas.add(new Carta("Q", Nipe));
+                            break;
+                        case 10:
+                            this._unknownCartas.add(new Carta("K", Nipe));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        this._unknownCartas.remove(Game.getTrunfo());
+    }
 }
